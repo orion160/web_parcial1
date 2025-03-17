@@ -3,8 +3,10 @@ import { Button, Col, Container, Form, Row, Image } from 'react-bootstrap'
 
 import LoginUpper from '~/assets/LoginUpper.png'
 import LoginLower from '~/assets/LoginLower.png'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 export default function LoginForm() {
+  const intl = useIntl()
   const navigate = useNavigate()
 
   return (
@@ -12,8 +14,12 @@ export default function LoginForm() {
       <Row className="justify-content-center align-items-center">
         <Col md={6} className="text-center mb-4 mb-md-0">
           <Image src={LoginUpper} alt="Login top decoration" fluid />
-          <h1 className="mt-3">TOO GOOD TO GO</h1>
-          <p>Food Wasting Solution</p>
+          <h1 className="mt-3">
+            <FormattedMessage id="login.mojo" />
+          </h1>
+          <p>
+            <FormattedMessage id="login.sol" />
+          </p>
           <Image src={LoginLower} alt="Login bottom decoration" fluid />
         </Col>
         <Col md={6}>
@@ -25,28 +31,34 @@ export default function LoginForm() {
             className="p-4 border rounded"
           >
             <Form.Group className="mb-3" controlId="loginUsername">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>
+                <FormattedMessage id="username" />
+              </Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter your username"
+                placeholder={intl.formatMessage({ id: 'login.user.prompt' })}
                 required
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>
+                <FormattedMessage id="passwd" />
+              </Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Enter your password"
+                placeholder={intl.formatMessage({ id: 'login.passwd.prompt' })}
                 required
                 minLength={6}
                 maxLength={7}
               />
               <Form.Text className="text-muted">
-                <Link to="/forgot-password">Forgot password?</Link>
+                <Link to="/forgot-password">
+                  <FormattedMessage id="login.forgot" />
+                </Link>
               </Form.Text>
             </Form.Group>
             <Button variant="primary" type="submit" className="w-100">
-              Login
+              <FormattedMessage id="login" />
             </Button>
           </Form>
         </Col>

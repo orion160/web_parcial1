@@ -1,6 +1,6 @@
-import { Card, Carousel, Container, Row } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Container, Row, Col, Carousel, Card } from 'react-bootstrap'
 import type { Route } from './+types/home'
-import { useEffect, useState } from 'react'
 
 interface Food {
   imageUrl: string
@@ -9,7 +9,7 @@ interface Food {
 }
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: 'Cart' }]
+  return [{ title: 'Menu' }]
 }
 
 export default function Carrousel({ params }: Route.ComponentProps) {
@@ -23,26 +23,22 @@ export default function Carrousel({ params }: Route.ComponentProps) {
   }, [])
 
   return (
-    <Container
-      fluid
-      className="d-flex justify-content-center align-items-center min-vh-100"
-    >
-      <Card className="p-4">
-        <Row className="mb-3">
-          <h2 className="text-center">{type} Carousel</h2>
-        </Row>
-        <Row>
+    <Container fluid className="p-0">
+      <Row className="bg-info text-white py-3 align-items-center justify-content-center">
+        <Col xs="auto">
+          <h1 className="mb-0 text-uppercase">{type}</h1>
+        </Col>
+      </Row>
+      <Row className="my-4 px-3 justify-content-center">
+        <Col md={10}>
           <Carousel>
             {foods.map((food, index) => (
               <Carousel.Item key={index}>
                 <img
-                  src={food.imageUrl || 'https://via.placeholder.com/800x400'}
-                  alt={food.name || 'Food item'}
-                  style={{
-                    width: '800px',
-                    height: '400px',
-                    objectFit: 'cover',
-                  }}
+                  src={food.imageUrl}
+                  alt={food.name}
+                  className="d-block w-100"
+                  style={{ objectFit: 'cover', height: '400px' }}
                 />
                 <Carousel.Caption>
                   <h3>{food.name}</h3>
@@ -51,8 +47,8 @@ export default function Carrousel({ params }: Route.ComponentProps) {
               </Carousel.Item>
             ))}
           </Carousel>
-        </Row>
-      </Card>
+        </Col>
+      </Row>
     </Container>
   )
 }

@@ -5,6 +5,7 @@ import CartImage from '~/assets/Cart.png'
 import MenuImage from '~/assets/Menu.png'
 import StoresImage from '~/assets/Stores.png'
 import { Link } from 'react-router'
+import { FormattedMessage } from 'react-intl'
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: 'Parcial Web' }]
@@ -20,14 +21,21 @@ export default function Home() {
   }
 
   const navItems = [
-    { link: '/carrousel/menu', image: MenuImage, label: 'Menu', alt: 'Menu' },
+    {
+      link: '/carrousel/menu',
+      image: MenuImage,
+      label: <FormattedMessage id="menu" />,
+    },
     {
       link: '/carrousel/stores',
       image: StoresImage,
-      label: 'Stores',
-      alt: 'Stores',
+      label: <FormattedMessage id="stores" />,
     },
-    { link: '/carrousel/cart', image: CartImage, label: 'Cart', alt: 'Cart' },
+    {
+      link: '/carrousel/cart',
+      image: CartImage,
+      label: <FormattedMessage id="cart" />,
+    },
   ]
 
   return (

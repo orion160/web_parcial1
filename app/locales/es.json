@@ -1,0 +1,13 @@
+{
+    "login.mojo": "DEMASIADO BUENO PARA LLEVAR",
+    "login.sol": "Solucion Contra el Desperdicio de Comida",
+    "login": "Iniciar Sesion",
+    "login.forgot": "¿Olvidaste tu contraseña?",
+    "passwd": "Contraseña",
+    "username": "Usuario",
+    "login.user.prompt": "Ingresa tu nombre de usuario",
+    "login.passwd.prompt": "Ingresa tu contraseña",
+    "menu": "Menu",
+    "stores": "Tiendas",
+    "cart": "Carrito de compra"
+}
