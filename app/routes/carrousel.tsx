@@ -1,38 +1,55 @@
-import { Card, Carousel, Col, Container, Row } from 'react-bootstrap'
+import { Card, Carousel, Container, Row } from 'react-bootstrap'
 import type { Route } from './+types/home'
 import { useEffect, useState } from 'react'
+
+interface Food {
+  imageUrl: string
+  name: string
+  description: string
+}
 
 export function meta({}: Route.MetaArgs) {
   return [{ title: 'Cart' }]
 }
 
 export default function Carrousel({ params }: Route.ComponentProps) {
-  const type = params.type
-
-  let [foods, changeFoods] = useState([])
+  const { type } = params
+  const [foods, setFoods] = useState<Food[]>([])
 
   useEffect(() => {
     fetch('https://my.api.mockaroo.com/parcial_mock_api.json?key=fccb2050')
-      .then((data) => data.json())
-      .then((d) => {
-        changeFoods(d)
-      })
+      .then((res) => res.json())
+      .then((data: Food[]) => setFoods(data))
   }, [])
 
   return (
     <Container
       fluid
-      className="d-flex justify-content-center align-items-center"
+      className="d-flex justify-content-center align-items-center min-vh-100"
     >
-      <Card>
-        <Row>{type}</Row>
+      <Card className="p-4">
+        <Row className="mb-3">
+          <h2 className="text-center">{type} Carousel</h2>
+        </Row>
         <Row>
-          {type} Carrousel
           <Carousel>
-            <Carousel.Item>1</Carousel.Item>
-            <Carousel.Item>2</Carousel.Item>
-            <Carousel.Item>3</Carousel.Item>
-            <Carousel.Item>4</Carousel.Item>
+            {foods.map((food, index) => (
+              <Carousel.Item key={index}>
+                <img
+                  src={food.imageUrl || 'https://via.placeholder.com/800x400'}
+                  alt={food.name || 'Food item'}
+                  style={{
+                    width: '800px',
+                    height: '400px',
+                    objectFit: 'cover',
+                  }}
+                />
+                <Carousel.Caption>
+                  <h3>{food.name}</h3>
+                  <p>{food.description}</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+            ))}
           </Carousel>
         </Row>
       </Card>
